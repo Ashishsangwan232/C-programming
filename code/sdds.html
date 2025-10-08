@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Science Student Roadmap Gantt Chart</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('date',   'Start Date');
+      data.addColumn('date',   'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+
+      data.addRows([
+        ['PF',  'Programming Foundations',           new Date(2025, 0, 1),  new Date(2025, 5, 30),  null,  0,    null],
+        ['DSA', 'Data Structures & Algorithms',      new Date(2025, 6, 1),  new Date(2025, 11, 31), null,  0,    'PF'],
+        ['FE',  'Frontend Development',              new Date(2026, 0, 1),  new Date(2026, 5, 30),  null,  0,    'DSA'],
+        ['BE',  'Backend Development',               new Date(2026, 6, 1),  new Date(2026, 11, 31), null,  0,    'FE'],
+        ['FS',  'Full-Stack Project & Version Control', new Date(2027, 0, 1),  new Date(2027, 5, 30),  null,  0,    'BE'],
+        ['INT','Internship',                         new Date(2027, 6, 1),  new Date(2027, 9, 30),  null,  0,    'FS'],
+        ['TDS','Testing & Deployment Skills',        new Date(2027, 10, 1), new Date(2027, 11, 31), null,  0,    'INT'],
+        ['CAP','Capstone Project Development',       new Date(2028, 0, 1),  new Date(2028, 5, 30),  null,  0,    'TDS'],
+        ['PP', 'Placement Preparation & Interviews', new Date(2028, 6, 1),  new Date(2028, 8, 30),  null,  0,    'CAP'],
+        ['CERT','Certifications & Further Learning', new Date(2028, 9, 1),  new Date(2028, 11, 31), null,  0,    'PP']
+      ]);
+
+      var options = {
+        height: 450,
+        gantt: {
+          trackHeight: 30,
+          labelStyle: {
+            fontName: 'Arial',
+            fontSize: 12
+          }
+        }
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+    #chart_div { margin-top: 40px; }
+    section { margin-top: 30px; }
+    section h2 { font-size: 1.2em; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Software Development (2025–2028)</h1>
+  <div id="chart_div"></div>
+  <section>
+    <h2>Phase Descriptions</h2>
+    <p><strong>Programming Foundations:</strong> Basics of Python, R, and programming paradigms.</p>
+    <p><strong>Data Structures & Algorithms:</strong> Core algorithms, complexity analysis, and problem-solving.</p>
+    <p><strong>Frontend Development:</strong> Visualization libraries like D3.js, dashboard frameworks.</p>
+    <p><strong>Backend Development:</strong> APIs, databases, and server-side data processing.</p>
+    <p><strong>Full-Stack Project & Version Control:</strong> Build end-to-end project using Git and collaborative workflows.</p>
+    <p><strong>Internship:</strong> Hands-on industry experience applying data science skills.</p>
+    <p><strong>Testing & Deployment Skills:</strong> Model validation, testing pipelines, and deployment on platforms.</p>
+    <p><strong>Capstone Project Development:</strong> Independent project integrating all learned components.</p>
+    <p><strong>Placement Preparation & Interviews:</strong> Mock interviews, resume building, and soft skills training.</p>
+    <p><strong>Certifications & Further Learning:</strong> Specialized courses (e.g., AWS, TensorFlow) and workshops.</p>
+  </section>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Science Roadmap Gantt Chart</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('date',   'Start Date');
+      data.addColumn('date',   'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+
+      data.addRows([
+        ['Python',          '<b>Python & Programming</b>',         new Date(2025, 0, 1),  new Date(2025, 5, 30),  null,  100, null],
+        ['Stats',           '<b>Statistics & Probability</b>',     new Date(2025, 6, 1),  new Date(2025, 11, 31), null,  100, 'Python'],
+        ['DSA',             '<b>Data Structures & Algorithms</b>', new Date(2026, 0, 1),  new Date(2026, 5, 30),  null,   0,    'Stats'],
+        ['DataViz',         '<b>Data Visualization</b>',           new Date(2026, 6, 1),  new Date(2026, 11, 31), null,   0,    'DSA'],
+        ['ML',              '<b>Machine Learning Foundations</b>', new Date(2027, 0, 1),  new Date(2027, 5, 30),  null,   0,    'DataViz'],
+        ['BigData',         '<b>Big Data & Tools</b>',             new Date(2027, 6, 1),  new Date(2027, 8, 30),  null,   0,    'ML'],
+        ['Internship',      '<b>Industry Internship</b>',          new Date(2027, 9, 1),  new Date(2027, 11, 30), null,   0,    'BigData'],
+        ['Capstone',        '<b>Capstone Project</b>',             new Date(2028, 0, 1),  new Date(2028, 5, 31),  null,   0,    'Internship'],
+        ['Prep',            '<b>Placement Prep & Interviews</b>',  new Date(2028, 6, 1),  new Date(2028, 8, 30),  null,   0,    'Capstone'],
+        ['Certs',           '<b>Certifications & Further Learning</b>', new Date(2028, 9, 1), new Date(2028, 11, 31), null, 0, 'Prep']
+      ]);
+
+      var options = {
+        height: 450,
+        gantt: {
+          trackHeight: 30,
+          labelStyle: {
+            color:'black',
+            fontName: 'Arial',
+            fontSize: 12,
+            bold: true
+          }
+        }
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #chart_div { margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <h1>Data Science Student Roadmap (2025–2028)</h1>
+  <div id="chart_div"></div>
+</body>
+</html>
