@@ -56,7 +56,7 @@ int main(){
             j++;
         }
     }
-
+ 
     while(i<n){
         ar3[k]=ar1[i];
         k++;
