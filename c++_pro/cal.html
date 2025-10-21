@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Calculator</title>
+<style>
+/* ----------  Layout & Styling  ---------- */
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f2f2f2;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.calculator{
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  padding:20px;
+  width:320px;
+  box-sizing:border-box;
+}
+
+.display{
+  background:#222;
+  color:#fff;
+  font-size:2rem;
+  text-align:right;
+  padding:15px;
+  border-radius:5px;
+  margin-bottom:15px;
+  min-height:55px;
+  overflow:hidden;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+button{
+  font-size:1.5rem;
+  padding:15px;
+  border:none;
+  border-radius:5px;
+  background:#e0e0e0;
+  cursor:pointer;
+  transition:transform .1s ease;
+}
+
+button:active{transform:scale(0.95);}
+
+button.operator{background:#ff9500;color:#fff;}
+button.equal{background:#34c759;color:#fff;grid-column:span 2;}
+button.clear{background:#ff3b30;color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="calculator">
+  <div class="display" id="display">0</div>
+  <div class="buttons">
+    <!-- Row 1 -->
+    <button class="clear">C</button>
+    <button class="operator">/</button>
+    <button class="operator">*</button>
+    <button class="operator">-</button>
+
+    <!-- Row 2 -->
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button class="operator">+</button>
+
+    <!-- Row 3 -->
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button class="equal">=</button>
+
+    <!-- Row 4 -->
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>0</button>
+
+    <!-- Row 5 -->
+    <button>.</button>
+  </div>
+</div>
+
+<script>
+/* ----------  JavaScript  ---------- */
+const displayEl = document.getElementById('display');
+let expression = '';          // holds the current expression
+let shouldReset = false;      // true after pressing "="
+
+function updateDisplay(value) {
+  // Clear expression when starting a new calculation after a result
+  if (shouldReset && value !== '=') {
+    expression = '';
+    shouldReset = false;
+  }
+
+  if (value === '=') {
+    // Remove trailing operator if present
+    if (/[+\-*/]$/.test(expression)) {
+      expression = expression.slice(0, -1);
+    }
+    try {
+      // Evaluate only if there's something to evaluate
+      if (expression.trim() !== '') {
+        expression = eval(expression).toString();
+      } else {
+        expression = '0';
+      }
+    } catch {
+      expression = 'Error';
+    }
+    shouldReset = true;            // Next keypress will start fresh
+  } else if (value === 'C') {
+    expression = '';
+    shouldReset = false;
+  } else {
+    // Prevent leading zeros (unless decimal is entered)
+    if (expression === '0' && /[0-9]/.test(value)) {
+      expression = value;
+    } else {
+      expression += value;
+    }
+  }
+
+  displayEl.textContent = expression || '0';
+}
+
+/* Button click listeners */
+document.querySelectorAll('.buttons button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const val = btn.textContent;
+    updateDisplay(val);
+  });
+});
+
+/* Keyboard support */
+document.addEventListener('keydown', e => {
+  const key = e.key;
+
+  // Numbers & operators
+  if (/^[0-9.]$/.test(key) || /[+\-*/]/.test(key)) {
+    updateDisplay(key);
+  }
+  // Enter or = key
+  else if (key === 'Enter' || key === '=') {
+    updateDisplay('=');
+  }
+  // Backspace – delete last character
+  else if (key === 'Backspace') {
+    expression = expression.slice(0, -1);
+    displayEl.textContent = expression || '0';
+    shouldReset = false;
+  }
+  // Escape – clear
+  else if (key === 'Escape') {
+    updateDisplay('C');
+  }
+});
+</script>
+
+</body>
+</html>
