@@ -1,5 +1,7 @@
 // #include <iostream>
 // using namespace std;
+// 
+//merging none sorted array
 // int main()
 // {
 //     int ar1[] = {1, 10, 9, 2};
@@ -30,8 +32,7 @@
 
 
 
-//merging og sorted array;
-
+//merging sorted array;
 #include <iostream>
 using namespace std;
 

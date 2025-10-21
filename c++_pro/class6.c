@@ -3,6 +3,7 @@
 
 // int main(){
 
+//     //Bubble sorting
 //     int a[]={1,2,5,0,3,23};
 //     // int a[]={1,2,3,4,5,6,7};
 //     int n=sizeof(a)/sizeof(a[0]);
@@ -17,8 +18,7 @@
 //                 a[j+1]=temp;
 //             }
 //         }
-//         if(flag=false){
-//             !flag;
+//         if(!flag){
 //             break;
 //         }
 //     }
@@ -27,6 +27,8 @@
 //     }
 // }
 
+
+//selection sorting
 #include <stdio.h>
 int main()
 {
