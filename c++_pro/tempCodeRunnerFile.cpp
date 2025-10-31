@@ -1,2 +1,1 @@
-.getdetails()
-    // S2
+1/2
