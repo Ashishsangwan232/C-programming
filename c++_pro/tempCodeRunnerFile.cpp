@@ -1,1 +1,2 @@
-1/2
+ endl;
+    printlist(revgroup);
