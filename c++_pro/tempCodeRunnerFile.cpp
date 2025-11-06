@@ -1,2 +1,1 @@
- endl;
-    printlist(revgroup);
+ptr
