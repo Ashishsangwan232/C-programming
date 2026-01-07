@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Node {
@@ -14,7 +14,6 @@ public:
     }
 };
 
-
 void display(Node* root) {
     if (!root) return;
 
@@ -23,10 +22,21 @@ void display(Node* root) {
     cout << root->data << " ";
 }
 
+void level(vector<vector<int>> &lvl,Node* root,int i){
+    if(!root) return;
+    if(i == lvl.size()){
+        lvl.push_back({});
+    }
+    lvl[i].push_back(root->data);
+    level(lvl,root->left,i+1);
+
+    level(lvl,root->right,i+1);
+}
+
 int main() {
 
     Node* root = new Node(5);
-
+    
     root->left = new Node(4);
     root->left->left = new Node(1);
     root->left->left->left = new Node(12);
@@ -43,6 +53,20 @@ int main() {
 
     cout << "Tree created successfully\n";
     display(root);
+    cout<<endl;
 
+    cout<<"Now level wise: "<<endl;
+    vector<vector<int>> lvl;
+    // int i=-1;
+    // int count=0;
+
+    level(lvl,root,0);
+
+    for(int i=0;i<lvl.size();i++){
+        for(int j=0; j<lvl[i].size();j++){
+            cout<<lvl[i][j]<<" ";
+        }
+        cout<<endl;
+    }
     return 0;
 }
